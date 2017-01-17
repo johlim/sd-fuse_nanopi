@@ -140,7 +140,7 @@ echo "make $1 partition"
 # umount all at first
 umount /dev/${DEV_NAME}* > /dev/null 2>&1
 
-if [ ${USE_SWAP} ]; then
+if [ ${USE_SWAP} -eq 1 ]; then
 	try sfdisk -u S -f --Linux /dev/${DEV_NAME} << EOF
 ${FAT_POSITION},${FAT_SIZE},0x0C,-
 ${EXT4_POSITION},${EXT4_SIZE},0x83,-
