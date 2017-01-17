@@ -118,7 +118,7 @@ if [ ${DEBUG_PRINT} -eq 1 ]; then
 	echo "--------------------------------------"
 	printf "%8s %9d %9d %9d\n" FAT: ${FAT_SIZE} ${FAT_POSITION} ${FAT_END}
 	printf "%8s %9d %9d %9d\n" EXT4: ${EXT4_SIZE} ${EXT4_POSITION} ${EXT4_END}
-	if [ ${USE_SWAP} ]; then
+	if [ ${USE_SWAP} -eq 1 ]; then
 		printf "%8s %9d %9d %9d\n" SWAP: ${SWAP_SIZE} ${SWAP_POSITION} ${SWAP_END}
 	fi
 	printf "%8s %9d %9d %9d\n" KERNEL: ${KERNEL_SIZE} ${KERNEL_POSITION} ${KERNEL_END}
@@ -140,7 +140,7 @@ echo "make $1 partition"
 # umount all at first
 umount /dev/${DEV_NAME}* > /dev/null 2>&1
 
-if [ ${USE_SWAP} ]; then
+if [ ${USE_SWAP} -eq 1 ]; then
 	try sfdisk -u S -f --Linux /dev/${DEV_NAME} << EOF
 ${FAT_POSITION},${FAT_SIZE},0x0C,-
 ${EXT4_POSITION},${EXT4_SIZE},0x83,-
